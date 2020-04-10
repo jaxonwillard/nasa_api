@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Nasa Stuffs</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .imgbox {
+        display: grid;
+        height: 100%;
+    }
+    .center-fit {
+        max-width: 100;
+        max-height: 100vh;
+        margin: auto;
+    }
+</style>
+
+
+
+</head>
+<body>
+    <div id='app'>
+    <img id='img' class="center-fit">
+
+"
+    </div>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+
+<script>var vue = new Vue({
+    el: '#app',
+    data: {
+        nasa_api_key : "RytX9Z1OHIR9Ya7NZEJkTVuffwjNBYQVvtfbWyw4",
+        APOD_api_url : `https://api.nasa.gov/planetary/apod?api_key=RytX9Z1OHIR9Ya7NZEJkTVuffwjNBYQVvtfbWyw4`,
+        APOD_data : undefined,
+    },
+    created() {
+        var get_APOD = fetch(this.APOD_api_url)
+            .then(response => response.json())
+            .then(json =>{
+                this.APOD_data = json;
+                var image = document.createElement("img");
+                var img = document.getElementById('img');
+                console.log(img);
+                img.src = this.APOD_data['hdurl'];
+            });
+    }
+});</script>
+</body>
+</html>
