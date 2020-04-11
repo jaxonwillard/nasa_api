@@ -23,9 +23,19 @@
 </head>
 <body>
     <div id='app'>
-    <img id='img' class="center-fit">
+    <div v-if="done == true">
+    <h2>{{ APOD_data['title'] }}</h2>
+    <p v-if="APOD_data['explanation'].length < 100">{{ APOD_data['explanation'] }}</p>
+    </div>
 
-"
+
+    <img id='img' class="center-fit">
+    <div v-if="done == true">
+    <p v-if="APOD_data['explanation'].length > 100">{{ APOD_data['explanation'] }}</p>
+
+
+    </div>
+
     </div>
 
 
@@ -40,6 +50,7 @@
         nasa_api_key : "RytX9Z1OHIR9Ya7NZEJkTVuffwjNBYQVvtfbWyw4",
         APOD_api_url : `https://api.nasa.gov/planetary/apod?api_key=RytX9Z1OHIR9Ya7NZEJkTVuffwjNBYQVvtfbWyw4`,
         APOD_data : undefined,
+        done : false,
     },
     created() {
         var get_APOD = fetch(this.APOD_api_url)
@@ -50,6 +61,7 @@
                 var img = document.getElementById('img');
                 console.log(img);
                 img.src = this.APOD_data['hdurl'];
+                this.done = true;
             });
     }
 });</script>
