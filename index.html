@@ -9,7 +9,7 @@
     }
     .imgbox {
         display: grid;
-        height: 100%;
+        width: 100%;
     }
     .center-fit {
         max-width: 100;
@@ -29,7 +29,7 @@
     </div>
 
 
-    <img id='img' class="center-fit">
+    <img id='img' class="imgbox">
     <div v-if="done == true">
     <p v-if="APOD_data['explanation'].length > 100">{{ APOD_data['explanation'] }}</p>
 
