@@ -27,9 +27,12 @@
     <h2>{{ APOD_data['title'] }}</h2>
     <p v-if="APOD_data['explanation'].length < 100">{{ APOD_data['explanation'] }}</p>
     </div>
-
-
-    <img id='img' class="imgbox">
+    <div v-if="media_type == 'video'">
+    <a v-bind:href="APOD_data['url']">
+    {{ APOD_data['url'] }}
+    </a>
+    </div>
+    <img id='img' class="imgbox"> 
     <div v-if="done == true">
     <p v-if="APOD_data['explanation'].length > 100">{{ APOD_data['explanation'] }}</p>
 
@@ -51,6 +54,7 @@
         APOD_api_url : `https://api.nasa.gov/planetary/apod?api_key=RytX9Z1OHIR9Ya7NZEJkTVuffwjNBYQVvtfbWyw4`,
         APOD_data : undefined,
         done : false,
+        media_type : ""
     },
     created() {
         var get_APOD = fetch(this.APOD_api_url)
@@ -59,9 +63,9 @@
                 this.APOD_data = json;
                 var image = document.createElement("img");
                 var img = document.getElementById('img');
-                console.log(img);
                 img.src = this.APOD_data['hdurl'];
                 this.done = true;
+                this.media_type = this.APOD_data['media_type']
             });
     }
 });</script>
